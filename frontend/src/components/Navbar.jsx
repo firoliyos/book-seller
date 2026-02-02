@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { navbarStyles } from '../assets/dummystyles'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../assets/logoicon.png'
 import { navItems } from '../assets/dummydata';
+import { FaOpencart } from 'react-icons/fa';
+import { User } from 'lucide-react';
+import { useCart } from '../CartContext/CartContext';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const { cart } = useCart()
+
+  const totalQuantity = cart.items.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [])
 
   return (
     <nav className={navbarStyles.nav(scrolled)}>
@@ -50,10 +65,36 @@ const Navbar = () => {
               )
             })}
           </div>
+
+          {/* Right Icons  */}
+          <div className={navbarStyles.rightIconsWrapper}>
+            <Link to='/cart' className={navbarStyles.cartWrapper}>
+              <div className={navbarStyles.cartGradient} />
+              <div className='relative'>
+                 <FaOpencart className={navbarStyles.cartIcon}/>
+                 {totalQuantity > 0 && (
+                   <span className={navbarStyles.cartBadge}>
+                      {totalQuantity}
+                   </span>
+                 )}
+              </div>
+            </Link>
+            <Link to ='/login' className={navbarStyles.loginWrapper}>
+            <div className={navbarStyles.loginGradient} />
+            <div className='relative'>
+                <User className={navbarStyles.loginIcon}/>
+            </div>
+            </Link>
+          </div>
+
+          {/* Mobile Menu BTN */}
+          <div className='md:hidden flex items-center'>
+            <button onClick={() => setIsOpen(!isOpen)} className={navbarStyles.menuBtn}>
+              <div className={navbarStyles.menuGradient} />
+            </button>
+          </div>
         </div>
       </div>
-
-
     </nav>
   )
 } 
