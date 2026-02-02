@@ -44,6 +44,19 @@ import A1 from "../assets/A1.png"
 import A2 from "../assets/A2.png"
 import A3 from "../assets/A3.png"
 
+/**
+ * An array of book objects representing a collection of books for a bookstore or book-selling application.
+ * Each book object contains the following properties:
+ * - id {number}: A unique identifier for the book.
+ * - title {string}: The title of the book.
+ * - author {string}: The author of the book.
+ * - price {string}: The price of the book, represented as a string (likely in the local currency).
+ * - description {string}: A brief summary or description of the book's content or theme.
+ * - image {any}: A reference to the image associated with the book (likely an imported image asset).
+ *
+ * This data structure is typically used as dummy or mock data for frontend development,
+ * allowing developers to display a list of books, their details, and images in the user interface.
+ */
 const books = [
   {
     id: 1,
