@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { words } from '../assets/dummydata'
 
-import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, searchButton, subHeader } from '../assets/dummystyles'
+import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, searchButton, statBox, statLabel, statNumber, statsContainer, subHeader } from '../assets/dummystyles'
 
 const Banner = () => {
 
@@ -80,6 +80,24 @@ const Banner = () => {
                     </button>
                   </div>
                 </form>
+
+                {/* STATS */}
+                <div className={statsContainer}>
+                  {[
+                    { number: "50K+", label: "Title" },
+                    { number: "1.2M+", label: "Readers" },
+                    { number: "240K+", label: "Topics" },
+                  ].map((stat,i) => (
+                    <div className={statBox} key={i}>
+                      <div className={statNumber}>
+                         {stat.number}
+                      </div>
+                      <div className={statLabel}>
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
              </div>
            </div>
         </div>
