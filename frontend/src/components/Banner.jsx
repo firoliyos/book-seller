@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { words } from '../assets/dummydata'
 
-import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, searchButton, statBox, statLabel, statNumber, statsContainer, subHeader } from '../assets/dummystyles'
+import { container, formContainer, geometricOverlay, glassBox, headerText, imageSection, imageStyle, imageWrapper, inputField, inputWrapper, paragraphText, searchButton, statBox, statLabel, statNumber, statsContainer, subHeader } from '../assets/dummystyles'
+
+import img from '../assets/banner1.png'
 
 const Banner = () => {
 
@@ -97,6 +99,13 @@ const Banner = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+             </div>
+
+             {/* IMAGES */}
+             <div className={imageSection}>
+                <div className={imageWrapper}>
+                  <img src={img} alt='Image Banner' className={imageStyle}/>
                 </div>
              </div>
            </div>
