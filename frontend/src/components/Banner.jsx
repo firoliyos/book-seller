@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Search } from 'lucide-react'
+import { words } from '../assets/dummydata'
 
-import { container, geometricOverlay, glassBox, headerText, paragraphText, subHeader } from '../assets/dummystyles'
+import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, subHeader } from '../assets/dummystyles'
+
 const Banner = () => {
+
+  const [searchQuery, setSearchQuery] = useState("")
+  const [currentWord, setCurrentWord] = useState(0)
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length) 
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      navigate(`/books?search=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
+
   return (
     <div className={container}>
         <div className={glassBox}>
@@ -27,6 +51,30 @@ const Banner = () => {
                         Dive into our vast collection of books across all genres. Whether you're seeking thrilling adventures, heartfelt romances, or insightful non-fiction, we have something for every reader.
                     </p>
                 </div>
+
+                {/* Search Function */}
+
+                <form 
+                onSubmit={handleSearch}
+                className='space-y-6 md:space-y-8'>
+                  <div className={formContainer}>
+                    <div className={inputWrapper}>
+                      <div className='absolute inset-0 bg-white/90 rounded-lg md:rounded-xl shadow-sm' />
+                      <div className='relative flex items-center'>
+                        <Search className='ml-4 md:ml-5 w-5 h-5 md:w-5 md:h-6 text-gray-600 group-focus-within:text-[#2B5876]'/>
+
+                        <input
+                          type='text' 
+                          value={searchQuery} 
+                          onChange={(e) => setSearchQuery(e.target.value)} 
+                          placeholder='Search for books, authors, titles or genres...' 
+                          className={inputField} />
+                      </div>
+                    </div>
+
+                    
+                  </div>
+                </form>
              </div>
            </div>
         </div>
