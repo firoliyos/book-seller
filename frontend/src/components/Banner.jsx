@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { words } from '../assets/dummydata'
 
-import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, subHeader } from '../assets/dummystyles'
+import { container, formContainer, geometricOverlay, glassBox, headerText, inputField, inputWrapper, paragraphText, searchButton, subHeader } from '../assets/dummystyles'
 
 const Banner = () => {
 
@@ -72,7 +72,12 @@ const Banner = () => {
                       </div>
                     </div>
 
-                    
+                    <button 
+                      type='submit'
+                      className={searchButton}>
+                        <Search className='w-4 h-4 md:w-5 md:h-5'/>
+                        <span className='sr-only'>Search</span>
+                    </button>
                   </div>
                 </form>
              </div>
