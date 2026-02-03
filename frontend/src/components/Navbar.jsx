@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logoicon.png'
 import { navItems } from '../assets/dummydata';
 import { FaOpencart } from 'react-icons/fa';
-import { User } from 'lucide-react';
+import { Menu, User, X } from 'lucide-react';
 import { useCart } from '../CartContext/CartContext';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -91,10 +91,56 @@ const Navbar = () => {
           <div className='md:hidden flex items-center'>
             <button onClick={() => setIsOpen(!isOpen)} className={navbarStyles.menuBtn}>
               <div className={navbarStyles.menuGradient} />
+              <div  className='relative'>
+                {isOpen ? <X className={navbarStyles.menuIcon} /> : <Menu className={navbarStyles.menuIcon} />}
+              </div>
             </button>
           </div>
         </div>
       </div>
+
+      {/* Menu Mobile Navigation  */}
+      {
+        isOpen && (
+          <div className={navbarStyles.mobileMenu}>
+            <div className={navbarStyles.mobileContainer}>
+              <div className='flex flex-col space-y-1'>
+                 {navItems.map(item => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={navbarStyles.mobileNavItem(isActive, item.color)} >
+                      <item.icon className={navbarStyles.mobileNavIcon(isActive, item.color)} />
+                      <span className={navbarStyles.mobileNavText(isActive, item.color)}>
+                        {item.name}
+                      </span>
+                    </Link>
+                  )
+                 })}
+
+                 <div className={navbarStyles.mobileIconRow}>
+                    <Link to='/cart' className=' relative group p-2'
+                    onClick={() => setIsOpen(false)} >
+                      <FaOpencart className=' h-5 w-5 text-gray-600 group-hover:text-amber-600' />
+                      {totalQuantity > 0 && (
+                        <span className={navbarStyles.mobileCartBadge}>
+                          {totalQuantity}
+                        </span>
+                      )}
+                    </Link>
+
+                    <Link to='/login' className='p-2 group' onClick={() => setIsOpen(false)}>
+                      <User className=' h-5 w-5 text-gray-600 group-hover:text-emerald-600' />
+                    </Link>
+                 </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </nav>
   )
 } 
