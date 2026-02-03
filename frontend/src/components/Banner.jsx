@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { words } from '../assets/dummydata'
 
-import { container, formContainer, geometricOverlay, glassBox, headerText, imageSection, imageStyle, imageWrapper, inputField, inputWrapper, overlayEffect, paragraphText, searchButton, statBox, statLabel, statNumber, statsContainer, subHeader } from '../assets/dummystyles'
+import { container, formContainer, geometricOverlay, glassBox, headerText, imageSection, imageStyle, imageWrapper, inputField, inputWrapper, overlayEffect, paragraphText, scrollText, scrollTextSection, searchButton, statBox, statLabel, statNumber, statsContainer, subHeader } from '../assets/dummystyles'
 
 import img from '../assets/banner1.png'
 
@@ -108,6 +108,13 @@ const Banner = () => {
                   <img src={img} alt='Image Banner' className={imageStyle}/>
                   <div className={overlayEffect} />
                 </div>
+             </div>
+           </div>
+
+           {/* FOOTER TEXTS */}
+           <div className={scrollTextSection}>
+             <div className={scrollText}>
+                Curated Collection • Cultural Perspective • Diverse Genres • Seamless Experience
              </div>
            </div>
         </div>
