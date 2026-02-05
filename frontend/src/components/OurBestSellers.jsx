@@ -1,11 +1,21 @@
 import React, { useRef } from 'react'
 
 import { ourBestSellersStyles as styles } from '../assets/dummystyles'
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart, Star } from 'lucide-react'
 import { bgColors, obsbooks } from '../assets/dummydata'
+import { useCart } from '../CartContext/CartContext'
 const OurBestSellers = () => {
 
     const scrollRef = useRef(null)
+    const {cart, dispatch} = useCart()
+
+    const inCart = (id) => cart?.items?.some(item => item.id === id)
+    const getQty = (id) => cart?.items?.find(item => item.id === id)?.quantity || 0
+    
+    const handleAdd = (book) => dispatch({type:'ADD_ITEM', payload: {...book, quantity: 1} })
+    const handleInc = (id) => dispatch({type:'INCREMENT', payload: {id }})
+    const handleDec = (id) => dispatch({type:'DECREMENT', payload: {id }})
+
     
     const scrollLeft = () => scrollLeft.current.scrollBy({left:-400, behaviour:'smooth'}) 
     const scrollRight = () => scrollLeft.current.scrollBy({left:400, behaviour:'smooth'})
@@ -61,6 +71,29 @@ const OurBestSellers = () => {
                            </div>
 
                            {/* ADD CONTROLS LIKE ADDTOCART */}
+                           <div className={styles.cartControls}>
+                            <div className={styles.priceQtyWrapper}>
+                                <span className={styles.price}>ETB {book.price.toFixed(2)}</span>
+
+                                {inCart(book.id) ? (
+                                    <div className={styles.qtyWrapper}>
+                                        <button onClick={() => handleDec(book.id) } className={styles.qtyBtn}>
+                                          <Minus size={18} />  
+                                        </button>
+
+                                        <span className={styles.qtyText}>{getQty(book.id)}</span>
+                                        <button onClick={() => handleInc(book.id) } className={styles.qtyBtn}>
+                                            <Plus size={18} />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <button onClick={() => handleAdd(book)} className={styles.addButton}>
+                                      <ShoppingCart className='h-4 w-4 md:h-5 md:w-5' />
+                                      <span>Add to Cart</span>
+                                    </button>
+                                )}
+                            </div>
+                           </div>
                         </div>
                     </div>
                 ))}
