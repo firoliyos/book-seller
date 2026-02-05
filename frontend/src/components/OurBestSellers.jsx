@@ -30,7 +30,7 @@ const OurBestSellers = () => {
                     <button onClick={scrollLeft} className={styles.navBtn}>
                         <ChevronLeft className={styles.navIcon} size={20}/>
                     </button>
-                    <button onClick={scrollLeft} className={styles.navBtn}>
+                    <button onClick={scrollRight} className={styles.navBtn}>
                         <ChevronRight className={styles.navIcon} size={20}/>
                     </button>
                   </div>
