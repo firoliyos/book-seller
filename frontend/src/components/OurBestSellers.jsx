@@ -54,7 +54,13 @@ const OurBestSellers = () => {
                                <h2 className={styles.bookTitle}>{book.title}</h2>
                                <p className={styles.bookAuthor}>{book.author}</p>
                               </div>
+
+                              <p className={styles.bookDesc}>
+                                Jane McLane's latest novel is a masterful blend of suspense and emotion, weaving a tale that keeps readers on the edge of their seats. With richly drawn characters and a plot full of unexpected twists, this book is a must-read for fans of psychological thrillers.
+                              </p>
                            </div>
+
+                           {/* ADD CONTROLS LIKE ADDTOCART */}
                         </div>
                     </div>
                 ))}
