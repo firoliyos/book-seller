@@ -1,16 +1,17 @@
 import { createContext, useEffect, useReducer, useContext  } from "react";
 
-const CartContext = createContext();
+const CartContext = createContext()
 
 const loadInitialState = () => {
     if(typeof window !== 'undefined') {
         const saved = localStorage.getItem('cart')
 
-        try {
-            const parsed = saved ? JSON.parse(saved) : null
-            if(parsed && Array.isArray(parsed.items)) return parsed
+      try {
+          const parsed = saved ? JSON.parse(saved) : null;
+        if(parsed && Array.isArray(parsed.items))  return parsed
             return { items: [] }
-        } catch {
+        } 
+        catch {
             return { items: [] }
         }
     }
