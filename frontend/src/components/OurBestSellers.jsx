@@ -1,13 +1,14 @@
 import React, { useRef } from 'react'
 
 import { ourBestSellersStyles as styles } from '../assets/dummystyles'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
+import { bgColors, obsbooks } from '../assets/dummydata'
 const OurBestSellers = () => {
 
-    const scrollLeft = useRef(null)
-
-    const handleScrollLeft = () => scrollLeft.current.scrollBy({left:-400, behaviour:'smooth'}) 
-    const handleScrollRight = () => scrollLeft.current.scrollBy({left:400, behaviour:'smooth'})
+    const scrollRef = useRef(null)
+    
+    const scrollLeft = () => scrollLeft.current.scrollBy({left:-400, behaviour:'smooth'}) 
+    const scrollRight = () => scrollLeft.current.scrollBy({left:400, behaviour:'smooth'})
     
   return (
     <section className={styles.section}>
@@ -36,6 +37,24 @@ const OurBestSellers = () => {
                   </div>
                </div>
             </div>
+
+            {/* BOOKS SECTION */}
+             <div className={styles.scrollContainer} ref={scrollRef}>
+                {obsbooks.map((book, index) => (
+                    <div key={book.id} className={styles.card(bgColors[index % bgColors.length])}>
+                        <div className={styles.cardInner}>
+                           <div className='space-y-3 md:space-y-4'>
+                              <div className={styles.stars}>
+                                 {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className='h-4 w-4 md:h-5 md:w-5 text-amber-400 fill-amber-400' size={16}/>
+                                 ))}
+                              </div>
+                           </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+           
        </div>
     </section>
   )
