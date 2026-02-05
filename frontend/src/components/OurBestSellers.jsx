@@ -95,10 +95,11 @@ const OurBestSellers = () => {
                             </div>
                            </div>
                         </div>
+
+                        <img src={book.image} alt={book.title} className={styles.bookImage}/>
                     </div>
                 ))}
-            </div>
-           
+            </div>           
        </div>
     </section>
   )
