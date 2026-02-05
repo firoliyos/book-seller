@@ -49,6 +49,11 @@ const OurBestSellers = () => {
                                     <Star key={i} className='h-4 w-4 md:h-5 md:w-5 text-amber-400 fill-amber-400' size={16}/>
                                  ))}
                               </div>
+
+                              <div className={styles.bookInfo}>
+                               <h2 className={styles.bookTitle}>{book.title}</h2>
+                               <p className={styles.bookAuthor}>{book.author}</p>
+                              </div>
                            </div>
                         </div>
                     </div>
